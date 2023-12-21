@@ -20,8 +20,10 @@ export default function Gallery() {
   return (
     <section className="grid-gallery mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {photos.map((photo, index) => (
-        <img
+        <Image
           key={index}
+          width={200}
+          height={200}
           src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${photo.attributes.url}`}
           alt=""
           onClick={() =>

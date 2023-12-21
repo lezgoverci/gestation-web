@@ -211,9 +211,9 @@ export default function Home() {
             life, the rebirth of the sun, and our interconnectedness. This
             piece, dedicated to those who strive to heal our planet, stands as a
             beacon of hope and continuity. As Gestation marks its 30th
-            anniversary, it remains a silent witness to our community's
-            journey—capturing our joys, reflections, and shared moments. It's
-            more than a sculpture; it's a testament to the cycles of nature and
+            anniversary, it remains a silent witness to our community&apos;s
+            journey—capturing our joys, reflections, and shared moments. It&apos;s
+            more than a sculpture; it&apos;s a testament to the cycles of nature and
             the resilience of life. I warmly invite you to share how Gestation
             has graced your life. Your stories and memories are the heartbeat of
             its legacy, celebrating the rich tapestry of our community & the
