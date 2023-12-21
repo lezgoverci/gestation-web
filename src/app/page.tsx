@@ -12,6 +12,8 @@ declare global {
 
 export default function Home() {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [photos, setPhotos] = useState<any[]>([]);
+
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -23,20 +25,48 @@ export default function Home() {
     const formData = new FormData();
 
     selectedFiles.forEach((file, index) => {
-      formData.append(`files`, file); // Strapi expects the files under the 'files' key
+      formData.append(`files`, file);
     });
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/upload`, {
+    const uploadResponse = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/upload`, {
       method: "POST",
       body: formData,
     });
 
-    if (response.ok) {
-      console.log("Files uploaded successfully");
+    if (uploadResponse.ok) {
+      const uploadedFiles = await uploadResponse.json();
+
+      const photoUrls = uploadedFiles.map((file: any) => file.url);
+
+      for (const url of photoUrls) {
+        const storeResponse = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/photos`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 'data': {"url": url} }),
+        });
+
+        if (storeResponse.ok) {
+          console.log(`Stored photo URL: ${url}`);
+        } else {
+          console.error(`Failed to store photo URL: ${url}`);
+        }
+      }
     } else {
       console.error("File upload failed");
     }
   };
+
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/photos`);
+      const data = await response.json();
+      setPhotos(data);
+    };
+
+    fetchPhotos();
+  }, []);
 
   useEffect(() => {
     const script = document.createElement("script");
