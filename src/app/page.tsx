@@ -12,7 +12,7 @@ declare global {
 
 export default function Home() {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [photos, setPhotos] = useState<any[]>([]);
+
 
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,16 +57,6 @@ export default function Home() {
       console.error("File upload failed");
     }
   };
-
-  useEffect(() => {
-    const fetchPhotos = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/photos`);
-      const data = await response.json();
-      setPhotos(data);
-    };
-
-    fetchPhotos();
-  }, []);
 
   useEffect(() => {
     const script = document.createElement("script");
