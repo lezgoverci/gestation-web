@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['localhost'],
+        domains: ['localhost','https://gestation-strapi.azurewebsites.net'],
       },
 }
 
