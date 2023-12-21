@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Gallery from "./gallery";
 
 declare global {
@@ -11,6 +11,33 @@ declare global {
 }
 
 export default function Home() {
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setSelectedFiles(Array.from(event.target.files));
+    }
+  };
+
+  const handleUpload = async () => {
+    const formData = new FormData();
+
+    selectedFiles.forEach((file, index) => {
+      formData.append(`files`, file); // Strapi expects the files under the 'files' key
+    });
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/upload`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      console.log("Files uploaded successfully");
+    } else {
+      console.error("File upload failed");
+    }
+  };
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
@@ -65,7 +92,6 @@ export default function Home() {
     }
 
     function updateChatbotPositionAndSize() {
-
       let iframe = document.querySelector("#chatbot-container");
       let chatbot = document.getElementById("voiceflow-chat");
 
@@ -74,7 +100,6 @@ export default function Home() {
           ".vfrc-widget--chat"
         ) as HTMLElement;
         if (chatbot_window && iframe) {
-
           let chatbot_window_body = chatbot_window.querySelector(
             ".vfrc-chat"
           ) as HTMLElement;
@@ -181,8 +206,10 @@ export default function Home() {
             type="file"
             accept="image/*,video/*"
             className="upload-input"
+            onChange={handleFileChange}
+            multiple // Add this line
           />
-          <button className="upload-button">Upload</button>
+          <button className="upload-button" onClick={handleUpload}>Upload</button>
         </section>
 
         <Gallery />
