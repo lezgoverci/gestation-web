@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Gallery from "./gallery";
-import CommentsForm from "./comments-form";
 import '../../styles/globals.css';
 
 declare global {
@@ -178,7 +177,7 @@ export default function Home() {
         </section>
 
 
-        <CommentsForm />
+
         <Gallery />
       </div>
     </main>

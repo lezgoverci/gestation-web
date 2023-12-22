@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function CommentsForm() {
+type CommentsFormProps = {
+    onUploadComplete?: () => void;
+  };
+
+  function CommentsForm({ onUploadComplete }: CommentsFormProps) {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
@@ -100,6 +104,10 @@ function CommentsForm() {
         }),
       }
     );
+
+    if (typeof onUploadComplete === 'function') {
+        onUploadComplete();
+      }
 
     if (!updateResponse.ok) {
       console.error("Failed to link photos to comment");
