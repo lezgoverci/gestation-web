@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Gallery from "./gallery";
+import '../../styles/globals.css';
 
 declare global {
   interface Window {
@@ -192,7 +193,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="w-full sm:px-4 md:px-8 lg:mx-16 xl:mx-32 2xl:mx-64 flex flex-col items-center justify-between">
+    <main className="w-full sm:px-4 md:px-8 flex flex-col items-center justify-between">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <section className="header">
           <h1 className="text-4xl font-bold">Gestation</h1>
