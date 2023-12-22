@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Gallery from "./gallery";
+import CommentsForm from "./comments-form";
 import '../../styles/globals.css';
 
 declare global {
@@ -12,52 +13,6 @@ declare global {
 }
 
 export default function Home() {
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-
-
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setSelectedFiles(Array.from(event.target.files));
-    }
-  };
-
-  const handleUpload = async () => {
-    const formData = new FormData();
-
-    selectedFiles.forEach((file, index) => {
-      formData.append(`files`, file);
-    });
-
-    const uploadResponse = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/upload`, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (uploadResponse.ok) {
-      const uploadedFiles = await uploadResponse.json();
-
-      const photoUrls = uploadedFiles.map((file: any) => file.url);
-
-      for (const url of photoUrls) {
-        const storeResponse = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/photos`, {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ 'data': {"url": url} }),
-        });
-
-        if (storeResponse.ok) {
-          console.log(`Stored photo URL: ${url}`);
-        } else {
-          console.error(`Failed to store photo URL: ${url}`);
-        }
-      }
-    } else {
-      console.error("File upload failed");
-    }
-  };
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -222,17 +177,8 @@ export default function Home() {
           </p>
         </section>
 
-        <section className="upload-section mt-8">
-          <input
-            type="file"
-            accept="image/*,video/*"
-            className="upload-input"
-            onChange={handleFileChange}
-            multiple // Add this line
-          />
-          <button className="upload-button" onClick={handleUpload}>Upload</button>
-        </section>
 
+        <CommentsForm />
         <Gallery />
       </div>
     </main>
