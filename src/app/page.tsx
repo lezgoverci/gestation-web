@@ -152,16 +152,17 @@ export default function Home() {
   return (
     <main className="w-full sm:px-4 md:px-8 flex flex-col items-center justify-between">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <section className="header">
+        <section className="header my-12">
           <h1 className="text-4xl font-bold">Gestation</h1>
           <h2 className="text-2xl font-bold mt-4">A collection of memories</h2>
         </section>
-        <div className="h-[400px] mt-4" id="chatbot-container">
-          {/* Insert your chatbot component here */}
-        </div>
-
-        <section className="paragraph-section mt-8">
-          <p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+          <div>
+            <div className="h-[400px]" id="chatbot-container">
+              {/* Insert your chatbot component here */}
+            </div>
+            <section className="paragraph-section mt-8">
+            <p>
             Thirty-three years ago, Gestation took root in Palisades Park, a
             sculpture born as I welcomed my first child, symbolizing the
             intertwining of life, the rebirth of the sun, and our
@@ -175,15 +176,19 @@ export default function Home() {
             the heartbeat of its legacy, celebrating the rich tapestry of our
             community and the spirit of renewal that binds us.
           </p>
-        </section>
-
-
-        <CommentsForm />
-        <Comments />
-        <div className="my-12" />
-        <GalleryForm />
-        <Gallery />
+            </section>
+          </div>
+          <div>
+            <CommentsForm />
+            <Comments />
+            <div className="my-12" />
+            <GalleryForm />
+            <Gallery />
+          </div>
+        </div>
       </div>
     </main>
   );
+
+
 }
