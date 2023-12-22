@@ -154,7 +154,7 @@ export default function Home() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <section className="header my-12">
           <h1 className="text-4xl font-bold">Gestation</h1>
-          <h2 className="text-2xl font-bold mt-4">A collection of memories</h2>
+          <h2 className="text-2xl font-bold mt-4">A Collection of Memories</h2>
         </section>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
           <div>
