@@ -3,7 +3,11 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Gallery from "./gallery";
-import '../../styles/globals.css';
+import "../../styles/globals.css";
+import GalleryForm from "./gallery-form";
+import CommentsForm from "./comments-form";
+import Comments from "./comments";
+
 
 declare global {
   interface Window {
@@ -12,7 +16,6 @@ declare global {
 }
 
 export default function Home() {
-
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
@@ -151,9 +154,7 @@ export default function Home() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <section className="header">
           <h1 className="text-4xl font-bold">Gestation</h1>
-          <h2 className="text-2xl font-bold mt-4">
-            A collection of memories and stories
-          </h2>
+          <h2 className="text-2xl font-bold mt-4">A collection of memories</h2>
         </section>
         <div className="h-[400px] mt-4" id="chatbot-container">
           {/* Insert your chatbot component here */}
@@ -161,23 +162,26 @@ export default function Home() {
 
         <section className="paragraph-section mt-8">
           <p>
-            Thirty years ago, Gestation took root in Palisades Park, a sculpture
-            born as I welcomed my first child, symbolizing the intertwining of
-            life, the rebirth of the sun, and our interconnectedness. This
-            piece, dedicated to those who strive to heal our planet, stands as a
-            beacon of hope and continuity. As Gestation marks its 30th
-            anniversary, it remains a silent witness to our community&apos;s
-            journey—capturing our joys, reflections, and shared moments. It&apos;s
-            more than a sculpture; it&apos;s a testament to the cycles of nature and
-            the resilience of life. I warmly invite you to share how Gestation
-            has graced your life. Your stories and memories are the heartbeat of
-            its legacy, celebrating the rich tapestry of our community & the
-            spirit of renewal that binds us.
+            Thirty-three years ago, Gestation took root in Palisades Park, a
+            sculpture born as I welcomed my first child, symbolizing the
+            intertwining of life, the rebirth of the sun, and our
+            interconnectedness. This piece, dedicated to those who strive to
+            heal our planet, stands as a beacon of hope and continuity. As
+            Gestation marks its 33rd anniversary, it remains a silent witness to
+            our community&apos;s journey—capturing our joys, reflections, and shared
+            moments. It&apos;s more than a sculpture; it&apos;s a testament to the cycles
+            of nature and the resilience of life. I warmly invite you to share
+            how Gestation has graced your life. Your stories and memories are
+            the heartbeat of its legacy, celebrating the rich tapestry of our
+            community and the spirit of renewal that binds us.
           </p>
         </section>
 
 
-
+        <CommentsForm />
+        <Comments />
+        <div className="my-12" />
+        <GalleryForm />
         <Gallery />
       </div>
     </main>
