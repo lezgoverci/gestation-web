@@ -192,7 +192,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex flex-col items-center justify-between p-24">
+    <main className="w-full sm:px-4 md:px-8 lg:mx-16 xl:mx-32 2xl:mx-64 flex flex-col items-center justify-between">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <section className="header">
           <h1 className="text-4xl font-bold">Gestation</h1>
@@ -200,7 +200,7 @@ export default function Home() {
             A collection of memories and stories
           </h2>
         </section>
-        <div className="h-[400px] sm:h-[600px] mt-4" id="chatbot-container">
+        <div className="h-[400px] mt-4" id="chatbot-container">
           {/* Insert your chatbot component here */}
         </div>
 
