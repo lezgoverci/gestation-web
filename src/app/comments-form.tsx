@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
 type CommentsFormProps = {
-    onUploadComplete?: () => void;
-  };
+  onUploadComplete?: () => void;
+};
 
-  function CommentsForm({ onUploadComplete }: CommentsFormProps) {
+function CommentsForm({ onUploadComplete }: CommentsFormProps) {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
@@ -46,7 +46,7 @@ type CommentsFormProps = {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          data: {url:url},
+          data: { url: url },
         }),
       })
     );
@@ -75,8 +75,8 @@ type CommentsFormProps = {
         },
         body: JSON.stringify({
           data: {
-            name,
-            comment,
+            from: name,
+            content: comment,
           },
         }),
       }
@@ -88,7 +88,6 @@ type CommentsFormProps = {
     }
 
     const createdComment = await commentResponse.json();
-
 
     const updateResponse = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/comments/${createdComment.data.id}`,
@@ -105,9 +104,9 @@ type CommentsFormProps = {
       }
     );
 
-    if (typeof onUploadComplete === 'function') {
-        onUploadComplete();
-      }
+    if (typeof onUploadComplete === "function") {
+      onUploadComplete();
+    }
 
     if (!updateResponse.ok) {
       console.error("Failed to link photos to comment");
@@ -122,28 +121,33 @@ type CommentsFormProps = {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="upload-form mt-8">
+    <form onSubmit={handleSubmit} className="mt-8">
       <input
         type="text"
         placeholder="Your name"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
+        className="w-full px-3 py-2 mb-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
       />
       <textarea
         placeholder="Your comment"
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         required
+        className="w-full px-3 py-2 mb-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
       />
       <input
         type="file"
         accept="image/*,video/*"
-        className="upload-input"
+        className="w-full px-3 py-2 mb-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black cursor-pointer"
         onChange={handleFileChange}
         multiple
       />
-      <button type="submit" className="upload-button">
+      <button
+        type="submit"
+        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
+      >
         Upload
       </button>
     </form>
