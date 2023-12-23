@@ -8,7 +8,6 @@ import GalleryForm from "./gallery-form";
 import CommentsForm from "./comments-form";
 import Comments from "./comments";
 
-
 declare global {
   interface Window {
     voiceflow: any;
@@ -16,6 +15,8 @@ declare global {
 }
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState("comments");
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
@@ -162,33 +163,56 @@ export default function Home() {
               {/* Insert your chatbot component here */}
             </div>
             <section className="paragraph-section mt-8">
-            <p>
-            Thirty-three years ago, Gestation took root in Palisades Park, a
-            sculpture born as I welcomed my first child, symbolizing the
-            intertwining of life, the rebirth of the sun, and our
-            interconnectedness. This piece, dedicated to those who strive to
-            heal our planet, stands as a beacon of hope and continuity. As
-            Gestation marks its 33rd anniversary, it remains a silent witness to
-            our community&apos;s journey—capturing our joys, reflections, and shared
-            moments. It&apos;s more than a sculpture; it&apos;s a testament to the cycles
-            of nature and the resilience of life. I warmly invite you to share
-            how Gestation has graced your life. Your stories and memories are
-            the heartbeat of its legacy, celebrating the rich tapestry of our
-            community and the spirit of renewal that binds us.
-          </p>
+              <p>
+                Thirty-three years ago, Gestation took root in Palisades Park, a
+                sculpture born as I welcomed my first child, symbolizing the
+                intertwining of life, the rebirth of the sun, and our
+                interconnectedness. This piece, dedicated to those who strive to
+                heal our planet, stands as a beacon of hope and continuity. As
+                Gestation marks its 33rd anniversary, it remains a silent
+                witness to our community&apos;s journey—capturing our joys,
+                reflections, and shared moments. It&apos;s more than a
+                sculpture; it&apos;s a testament to the cycles of nature and the
+                resilience of life. I warmly invite you to share how Gestation
+                has graced your life. Your stories and memories are the
+                heartbeat of its legacy, celebrating the rich tapestry of our
+                community and the spirit of renewal that binds us.
+              </p>
             </section>
           </div>
           <div>
             <CommentsForm />
-            <Comments />
-            <div className="my-12" />
+
+            {/* <div className="my-12" /> */}
             {/* <GalleryForm /> */}
             {/* <Gallery /> */}
+
+            <div className="flex justify-center my-4 mt-14">
+              <button
+                onClick={() => setActiveTab("comments")}
+                className={`w-full flex-1 px-4 py-2 ${
+                  activeTab === "comments"
+                    ? "bg-blue-500 text-white"
+                    : "bg-white text-black"
+                }`}
+              >
+                Comments
+              </button>
+              <button
+                onClick={() => setActiveTab("gallery")}
+                className={`w-full flex-1 px-4 py-2 ${
+                  activeTab === "gallery"
+                    ? "bg-blue-500 text-white"
+                    : "bg-white text-black"
+                }`}
+              >
+                Gallery
+              </button>
+            </div>
+            {activeTab === "comments" ? <Comments /> : <Gallery />}
           </div>
         </div>
       </div>
     </main>
   );
-
-
 }
