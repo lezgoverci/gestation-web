@@ -182,8 +182,8 @@ export default function Home() {
             <CommentsForm />
             <Comments />
             <div className="my-12" />
-            <GalleryForm />
-            <Gallery />
+            {/* <GalleryForm /> */}
+            {/* <Gallery /> */}
           </div>
         </div>
       </div>
